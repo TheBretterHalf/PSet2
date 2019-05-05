@@ -1,1 +1,1 @@
-CS50 Week 2 cont.
+CS50 Week 2 continuation
