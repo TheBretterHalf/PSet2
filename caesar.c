@@ -12,13 +12,13 @@ int main(int argc, string argv[])
     for (int i = 0; i < strlen(s); i++)
     {
         //printf("%i\n", s[i]+cypher);
-        while ((s[i]+cypher)>122)
+        if ((s[i]+cypher)>122)
         {
             //printf ("%i", s[i]);
             s[i] = (int) s[i]+cypher-26;
             //printf ("%i\n", s[i]);
         }
-        while ((s[i]+cypher)>90 && (s[i]+cypher)<=96)
+        if ((s[i]+cypher)>90 && (s[i]+cypher)<=96)
         {
             //printf ("%i\n", s[i]);
             s[i] = (int) s[i]+cypher-26;
@@ -28,9 +28,9 @@ int main(int argc, string argv[])
         s[i] = (int) s[i]+cypher;
         //printf ("%i\n", s[i]);
         //s[i] = (int) s[i]+cypher;
-        printf("ciphertext: %s\n", s);
+        //printf("ciphertext: %s\n", s);
     }
-    //printf("ciphertext: %s\n", s);
+    printf("ciphertext: %s\n", s);
     return 0;
     //printf("\n");
 }
