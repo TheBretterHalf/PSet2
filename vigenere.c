@@ -7,56 +7,73 @@
 
 //|| isalpha(argv[1][0])
 
-char ctext[]="";
+char ctext[] = "";
+
 
 int main(int argc, string argv[])
 {
-    //printf("%s\n", argv[1]);
-    //argv[1] == NULL || argc>2
-    if (argv[1] == NULL || !isalpha(argv[1][0]) || argc>2)
+    if (argv[1] == NULL || argc > 2)
     {
-        //printf("%i\n", argc);
-        //printf("%s\n", argv[1]);
-        //printf("%c\n", argv[1][0]);
-        //printf("%i\n", isalpha());
         return 1;
     }
-    else
+    for (int j = 0; j < strlen(argv[1]); j++)
     {
-        string s = get_string("plaintext: ");
-        //printf("Success\n");
-        for (int i = 0; i < strlen(s); i++)
+        if (!isalpha(argv[1][j]))
         {
-            int kcounter = i % strlen(argv[1]);
-            //printf("%i\n", kcounter);
-            if (isupper(s[i]))
-            {
-                //s[i] =(int) (((( s[i]) - 'A') % 26) + 'A') + ((((argv[1][kcounter]) - 'A') % 26) + 'A');
-                s[i] = (((s[i]-'A') + (argv[1][kcounter]-'A'))%26)+'A';
-                //printf("%c\n", s[i]);
-            }
-            else if (islower(s[i]))
-            {
-                //printf("%c\t", s[i]);
-                //printf("%i\t", (int) s[i]);
-                //s[i] =(int) (((( s[i]) - 'a') % 26) + 'a') + ((((argv[1][kcounter]) - 'a') % 26) + 'a');
-                s[i] = (((s[i]-'a') + (argv[1][kcounter]-'a'))%26)+'a';
-                //printf("%c\t\n", s[i]);
-            }
-            //printf("%i\n", b);
-            //printf ("%i\n", s[i]);
-            //s[i] = (int) s[i]+cypher;
-            //printf("ciphertext: %s\n", s);
-            else
-            {
-
-            }
-            //printf("%s\n", s);
-            strcpy(ctext,s);
+            return 1;
         }
-        printf("ciphertext: %s\n", ctext);
-        return 0;
     }
+    int kcounter = strlen(argv[1]) - 1;
+    string s = get_string("plaintext: ");
+    for (int i = 0; i < strlen(s); i++)
+    {
+        if (isalpha(s[i]))
+        {
+            kcounter++;
+            //printf("%i\t", kcounter);
+            kcounter = kcounter % (strlen(argv[1]));
+            //printf("%i\t\n", kcounter);
+            if (isupper(argv[1][kcounter]))
+            {
+                int upper = argv[1][kcounter] - 'A';
+                if (isupper(s[i]))
+                {
+                    s[i] = (((s[i] - 'A') + upper) % 26) + 'A';
+                }
+                else if (islower(s[i]))
+                {
+                    s[i] = ((((s[i] - 'a') + upper)) % 26) + 'a';
+                }
+                else
+                {
+
+                }
+            }
+            else if (islower(argv[1][kcounter]))
+            {
+                int lower = argv[1][kcounter] - 'a';
+                if (isupper(s[i]))
+                {
+                    s[i] = (((s[i] - 'A') + lower) % 26) + 'A';
+                }
+                else if (islower(s[i]))
+                {
+                    s[i] = ((((s[i] - 'a') + lower)) % 26) + 'a';
+                }
+                else
+                {
+
+                }
+            }
+        }
+        else
+        {
+
+        }
+        strcpy(ctext, s);
+    }
+    printf("ciphertext: %s\n", ctext);
+    return 0;
 }
 
 // int shift(char c)
